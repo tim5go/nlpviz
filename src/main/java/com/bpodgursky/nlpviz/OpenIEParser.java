@@ -28,8 +28,10 @@ public class OpenIEParser {
 	
 	private final StanfordCoreNLP pipeline;
 	
-	public OpenIEParser(Properties properties) {
-		pipeline = new StanfordCoreNLP(properties);
+	public OpenIEParser() {
+	    Properties props = new Properties();
+	    props.setProperty("annotators", "tokenize,ssplit,pos,lemma,depparse,parse,natlog,openie");
+		pipeline = new StanfordCoreNLP(props);
 	}
 
 	public static void main(String[] args) throws Exception {

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.EnumSet;
 import java.util.concurrent.Semaphore;
 
+import com.bpodgursky.nlpviz.servlet.OpenIEServlet;
 import com.bpodgursky.nlpviz.servlet.ParseServlet;
 import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.jetty.server.Server;
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
 public class WebServer implements Runnable {
   public static final int DEFAULT_PORT = 43315;
   public static final String PARSER = "/parser";
+  public static final String OPENIE = "/openie";
   public static final String HOME = "/home";
 
   private final Semaphore shutdownLock = new Semaphore(0);
@@ -37,7 +39,7 @@ public class WebServer implements Runnable {
 
       WebAppContext context = new WebAppContext(warUrlString, "/");
       context.addServlet(new ServletHolder(new ParseServlet()), PARSER);
-//      context.addServlet(new ServletHolder(new HomeServlet()), HOME);
+      context.addServlet(new ServletHolder(new OpenIEServlet()), OPENIE);
       context.addFilter(GzipFilter.class, "/*", EnumSet.of(DispatcherType.REQUEST));
 
       uiServer.setHandler(context);

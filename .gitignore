@@ -1,3 +1,6 @@
 target
 nlpviz.log
 /bin/
+.classpath
+.project
+.settings/
