@@ -74,7 +74,7 @@ public class OpenIEParser {
 	  }
   
   public static JSONObject toJSON(Collection<RelationTriple> triples) throws JSONException {
-	    JSONObject triplesObject = new JSONObject();
+	    List<JSONObject> tripleList = Lists.newArrayList();
 	    
 	    for (RelationTriple triple : triples) {
 	    	JSONObject obj = new JSONObject();
@@ -85,10 +85,10 @@ public class OpenIEParser {
 	          obj.put("subjectLemmaGloss", triple.subjectLemmaGloss());
 	          obj.put("relationLemmaGloss", triple.relationLemmaGloss());
 	          obj.put("objectLemmaGloss", triple.objectLemmaGloss());
-	          triplesObject.put("triple", obj);
+	          tripleList.add(new JSONObject().put("triple", obj));
 	        }
 
-
-	    return triplesObject;
+	    return new JSONObject()
+	            .put("tripleList", new JSONArray(tripleList));
 	  }
 }
