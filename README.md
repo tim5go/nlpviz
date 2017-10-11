@@ -15,7 +15,10 @@ dependencies - the Stanford NLP core model jar is on its own over 200 MB.
 
 Next, start the parsing servlet with:
 
-`mvn exec:java`
+```
+export MAVEN_OPTS="-Xmx3000m"
+mvn exec:java
+```
 
 At the end of the output you should see:
 
